@@ -4,7 +4,9 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.app.DatePickerDialog;
+
 import android.content.Intent;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +30,7 @@ public class MakeNewRoomActivity extends AppCompatActivity {
         newCapacity = (EditText) findViewById(R.id.maxnum);
         newNotes = (EditText) findViewById(R.id.notes);
         newCalendar = Calendar.getInstance();
+
         addButton = (Button) findViewById(R.id.addroombutton);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -50,6 +53,7 @@ public class MakeNewRoomActivity extends AppCompatActivity {
                         newCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

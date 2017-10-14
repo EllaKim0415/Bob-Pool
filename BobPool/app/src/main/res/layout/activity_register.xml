@@ -11,12 +11,156 @@
     android:orientation="vertical">
 
     <!-- Login progress -->
-    <TextView
-        android:id="@+id/textViewRegistration"
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registration"
-        android:textSize="20sp" />
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/editText10"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editText3Phone"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <EditText
+            android:id="@+id/editTextFirstName"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewRegistration"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:hint="First Name"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <EditText
+            android:id="@+id/editTextLastName"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignBaseline="@+id/editTextFirstName"
+            android:layout_alignBottom="@+id/editTextFirstName"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:ems="10"
+            android:hint="Last Name"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <EditText
+            android:id="@+id/editText3Phone"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editTextAddress"
+            android:ems="10"
+            android:hint="Phone Number"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editTextFirstName"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <EditText
+            android:id="@+id/editText6username"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editText10"
+            android:ems="10"
+            android:hint="Username (Email)"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <EditText
+            android:id="@+id/editText9password"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editText6username"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <EditText
+            android:id="@+id/editText11confirm"
+            android:layout_width="178dp"
+            android:layout_height="50dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editText9password"
+            android:ems="10"
+            android:hint="Confirm Password"
+            android:inputType="textPersonName"
+            android:labelFor="@+id/_name" />
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_below="@+id/editText11confirm"
+            android:layout_toLeftOf="@+id/editTextLastName"
+            android:layout_toStartOf="@+id/editTextLastName"
+            android:layout_marginRight="38dp"
+            android:layout_marginEnd="38dp"
+            android:layout_marginTop="19dp" />
+
+        <TextView
+            android:id="@+id/textViewRegistration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/editText8"
+            android:layout_alignBottom="@+id/editText8"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Registration"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/cancelbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/registerButton"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_toEndOf="@+id/editTextFirstName"
+            android:layout_toRightOf="@+id/editTextFirstName"
+            android:text="Cancel" />
+
+    </RelativeLayout>
 
     <ProgressBar
         android:id="@+id/login_progress"
