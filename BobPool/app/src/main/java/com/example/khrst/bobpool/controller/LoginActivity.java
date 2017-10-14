@@ -30,6 +30,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.khrst.bobpool.model.Location_Checker_Screen;
+
 import android.widget.Toast;
 
 import com.example.khrst.bobpool.R;
@@ -196,9 +198,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             return;
         }
-        System.out.println("-----------------------------------------------------------------------------");
         setCurrentUser();
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -234,7 +234,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             }
         });
-
     }
 
     private boolean isEmailValid(String email) {
