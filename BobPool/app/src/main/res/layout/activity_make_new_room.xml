@@ -43,7 +43,7 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="29dp"
         android:layout_marginStart="29dp"
-        android:text="Name" />
+        android:text="Title" />
 
     <EditText
         android:id="@+id/newname"
@@ -152,23 +152,15 @@
         android:layout_marginBottom="96dp"
         android:text="add" />
 
-    <RadioButton
-        android:id="@+id/AMradioButton"
+    <ToggleButton
+        android:id="@+id/ampmbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/textView5"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignLeft="@+id/maxnum"
-        android:layout_alignStart="@+id/maxnum"
-        android:text="am" />
-
-    <RadioButton
-        android:id="@+id/PMradioButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/AMradioButton"
-        android:layout_toEndOf="@+id/AMradioButton"
-        android:layout_toRightOf="@+id/AMradioButton"
-        android:text="pm" />
+        android:layout_above="@+id/maxnum"
+        android:layout_toEndOf="@+id/newTime"
+        android:layout_toRightOf="@+id/newTime"
+        android:text="ampmbutton"
+        android:textOff="AM"
+        android:textOn="PM" />
 
 </RelativeLayout>

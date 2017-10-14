@@ -13,13 +13,27 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.DatePicker;
+import android.widget.ToggleButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import com.example.khrst.bobpool.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MakeNewRoomActivity extends AppCompatActivity {
     private Button addButton;
+    private ToggleButton ampmButton;
     private EditText newName, newDate, newTime, newCapacity, newNotes;
     private Calendar newCalendar;
+
+
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = database.getInstance().getReference("user");
+    FirebaseAuth firebaseAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +44,7 @@ public class MakeNewRoomActivity extends AppCompatActivity {
         newCapacity = (EditText) findViewById(R.id.maxnum);
         newNotes = (EditText) findViewById(R.id.notes);
         newCalendar = Calendar.getInstance();
-
+        ampmButton = (ToggleButton) findViewById(R.id.ampmbutton);
         addButton = (Button) findViewById(R.id.addroombutton);
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -54,6 +68,7 @@ public class MakeNewRoomActivity extends AppCompatActivity {
             }
         });
 
+        firebaseAuth = FirebaseAuth.getInstance();
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
