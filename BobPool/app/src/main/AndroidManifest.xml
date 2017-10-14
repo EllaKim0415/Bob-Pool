@@ -23,11 +23,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+
         <activity android:name=".RegisterActivity" />
-=======
+
         <activity android:name=".RestaurantActivity"></activity>
->>>>>>> origin/master
+
     </application>
 
 </manifest>
