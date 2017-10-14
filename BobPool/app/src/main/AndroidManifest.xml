@@ -32,7 +32,9 @@
         </activity>
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".RestaurantActivity"/>
-
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -49,6 +51,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
         </activity>
+        <activity android:name=".Location_Checker_Screen"></activity>
     </application>
 
 </manifest>

@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                startActivity(new Intent(LoginActivity.this, MapsActivity.class));
+                startActivity(new Intent(LoginActivity.this, Location_Checker_Screen.class));
             }
         });
         registerButton.setOnClickListener(new OnClickListener() {
