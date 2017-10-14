@@ -7,7 +7,7 @@
                                android:layout_height="match_parent"
                                android:clickable="true"
                                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                               tools:context="com.example.khrst.bobpool.model.Location_Checker_Screen"
+                               tools:context="com.example.khrst.bobpool.controller.Location_Checker_Screen"
                                tools:showIn="@layout/activity_location__checker__screen"
                                tools:layout_editor_absoluteY="25dp"
                                tools:layout_editor_absoluteX="0dp">
