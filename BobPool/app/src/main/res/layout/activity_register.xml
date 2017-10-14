@@ -17,20 +17,6 @@
         android:layout_height="match_parent">
 
         <EditText
-            android:id="@+id/editText10"
-            android:layout_width="178dp"
-            android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/editText3Phone"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPersonName"
-            android:labelFor="@+id/_name" />
-
-        <EditText
             android:id="@+id/editTextFirstName"
             android:layout_width="178dp"
             android:layout_height="50dp"
@@ -88,15 +74,15 @@
             android:id="@+id/editText6username"
             android:layout_width="178dp"
             android:layout_height="50dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/editText10"
             android:ems="10"
             android:hint="Username (Email)"
             android:inputType="textPersonName"
-            android:labelFor="@+id/_name" />
+            android:labelFor="@+id/_name"
+            android:layout_below="@+id/editText3Phone"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <EditText
             android:id="@+id/editText9password"
