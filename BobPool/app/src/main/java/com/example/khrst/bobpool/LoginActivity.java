@@ -93,7 +93,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         registerButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RestaurantActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
             }
         });
         mLoginFormView = findViewById(R.id.login_form);
