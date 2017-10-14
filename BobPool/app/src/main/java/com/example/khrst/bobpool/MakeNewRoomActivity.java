@@ -19,6 +19,10 @@ public class MakeNewRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_new_room);
         newDate = (EditText) findViewById(R.id.newDate);
+        newName = (EditText) findViewById(R.id.newname);
+        newTime = (EditText) findViewById(R.id.newTime);
+        newCapacity = (EditText) findViewById(R.id.maxnum);
+        newNotes = (EditText) findViewById(R.id.notes);
         newCalendar = Calendar.getInstance();
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
