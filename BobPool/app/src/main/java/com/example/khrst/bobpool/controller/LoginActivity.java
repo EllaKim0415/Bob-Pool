@@ -1,4 +1,4 @@
-package com.example.khrst.bobpool.Controller;
+package com.example.khrst.bobpool.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

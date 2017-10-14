@@ -1,4 +1,4 @@
-package com.example.khrst.bobpool.Model;
+package com.example.khrst.bobpool.model;
 
 //import java.util.Calendar;
 //import java.util.Date;
