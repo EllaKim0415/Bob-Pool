@@ -1,7 +1,9 @@
-package com.example.khrst.bobpool;
+package com.example.khrst.bobpool.Controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.khrst.bobpool.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

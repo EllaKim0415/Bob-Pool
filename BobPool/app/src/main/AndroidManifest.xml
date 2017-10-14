@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Controller.LoginActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,9 +24,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".MakeNewRoomActivity"></activity>
-        <activity android:name=".RestaurantActivity"></activity>
+        <activity android:name=".Controller.RegisterActivity" />
+        <activity android:name=".Controller.MakeNewRoomActivity"></activity>
+        <activity android:name=".Controller.RestaurantActivity"></activity>
 
     </application>
 
