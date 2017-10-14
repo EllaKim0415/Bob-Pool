@@ -47,7 +47,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -323,14 +322,6 @@ public class MapsActivity extends FragmentActivity
                 return false;
             }
         });
-//        for (DatabaseTester.myObject testing: list) {
-//            circle = mMap.addCircle(new CircleOptions()
-//                .center(new LatLng(testing.getBegintrip_lat(), testing.getBegintrip_long()))
-//                .radius(50)
-//                .strokeWidth(10)
-//                .strokeColor(Color.argb((int) testing.getSurge() * 25, 203, 45, 45))
-//                .fillColor(Color.argb((int) testing.getSurge() * 25, 203, 45, 45)));
-//        }
     }
 
     /**
@@ -470,7 +461,6 @@ public class MapsActivity extends FragmentActivity
             }
             ArrayList<MarkerOptions> markerOptionsArrayList = findRestaurants(url, result, true);
             if (markerOptionsArrayList != null) {
-//                restaurantMarkers = markerOptionsArrayList;
                 return markerOptionsArrayList;
             } else {
                 return null;
@@ -507,7 +497,6 @@ public class MapsActivity extends FragmentActivity
                             JSONObject restaurant = null;
                             restaurant = resultsArray.getJSONObject(i);
                             String restaurantName = restaurant.getString("name");
-//                            System.out.println("=======================================\n" + restaurantName);
 
                             JSONObject geometry = null;
                             try {
