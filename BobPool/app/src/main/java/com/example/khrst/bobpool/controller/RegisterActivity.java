@@ -62,6 +62,7 @@ public class RegisterActivity extends AppCompatActivity {
         passwordEdit = (EditText) findViewById(R.id.editText9password);
         confirmEdit = (EditText) findViewById(R.id.editText11confirm);
 
+        firebaseAuth = FirebaseAuth.getInstance();
         Button registerButton = (Button) findViewById(R.id.registerButton);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +84,13 @@ public class RegisterActivity extends AppCompatActivity {
                 }
                 System.out.println("TTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTT2");
                 registerUser(usernameEdit.getText().toString(), passwordEdit.getText().toString());
+            }
+        });
+        Button cancelButton = (Button) findViewById(R.id.cancelbutton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
             }
         });
 

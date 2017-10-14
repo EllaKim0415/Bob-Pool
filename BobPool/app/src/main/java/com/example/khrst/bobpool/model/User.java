@@ -23,8 +23,12 @@ public class User {
         this.password = password;
     }
 
+    public User() {
+
+    }
+
     public String getName() {
-        return firstName + lastName;
+        return firstName + " " + lastName;
     }
 
     public String getUsername() {
@@ -33,6 +37,10 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
     public String getAddress() {
