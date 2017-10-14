@@ -1,4 +1,4 @@
-package com.example.khrst.bobpool.model;
+package com.example.khrst.bobpool.controller;
 
 /**
  * Created by com93 on 10/14/2017.
@@ -17,7 +17,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.khrst.bobpool.R;
-import com.example.khrst.bobpool.controller.MapsActivity;
 import com.wang.avi.AVLoadingIndicatorView;
 
 public class Location_Checker_Screen extends AppCompatActivity {
