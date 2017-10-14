@@ -3,10 +3,12 @@ package com.example.khrst.bobpool.controller;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
@@ -19,6 +21,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.AutocompleteFilter;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.Places;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
@@ -34,6 +37,19 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -52,6 +68,7 @@ public class MapsActivity extends FragmentActivity
 
     private Circle circle;
     private Marker prevMarker;
+    private ArrayList<MarkerOptions> restaurantMarkers = new ArrayList<>();
 
     // The entry point to Google Play services, used by the Places API and Fused Location Provider.
     private GoogleApiClient mGoogleApiClient;
@@ -107,6 +124,11 @@ public class MapsActivity extends FragmentActivity
 
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        AutocompleteFilter typeFilter = new AutocompleteFilter.Builder()
+                .setTypeFilter(Place.TYPE_RESTAURANT)
+                .build();
+
+        autocompleteFragment.setFilter(typeFilter);
         autocompleteFragment.setHint("From...");
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
@@ -118,7 +140,6 @@ public class MapsActivity extends FragmentActivity
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
 
                 destination = place.getLatLng().latitude + "," + place.getLatLng().longitude;
-                //new GetDirection().execute();
             }
 
             @Override
@@ -402,37 +423,34 @@ public class MapsActivity extends FragmentActivity
         }
 
         mLastKnownLocation = location;
+        new DisplayRestaurants().execute();
     }
 
-/*
-    public class GetDirection extends AsyncTask<String, String, String> {
-        public String carTime;
-        public String publicTime;
-        public int carNum;
-        public int publicNum;
+
+    public class DisplayRestaurants extends AsyncTask<Void, Integer, ArrayList<MarkerOptions>> {
 
         @Override
-        protected String doInBackground(String ... params) {
+        protected ArrayList<MarkerOptions> doInBackground(Void... params) {
             String result = "";
-            URL carUrl = null;
-            URL transitUrl = null;
+            URL url = null;
             try {
-                carUrl = new URL("http://maps.googleapis.com/maps/api/directions/json?origin=" + mLastKnownLocation.getLatitude() + "," + mLastKnownLocation.getLongitude() + "&destination=" + destination + "&sensor=false");
-                transitUrl = new URL("http://maps.googleapis.com/maps/api/directions/json?origin=" + mLastKnownLocation.getLatitude() + "," + mLastKnownLocation.getLongitude() + "&destination=" + destination + "&mode=transit&sensor=false");
+                url = new URL("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=" + mLastKnownLocation.getLatitude() + "," + mLastKnownLocation.getLongitude() + "&radius=500&type=restaurant&key=AIzaSyBSIwKJjWj9U7JW7oNe8bCOx3x-FgDOdPM");
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
-
-            if (estimateTime(carUrl, result, true) == "true" && estimateTime(transitUrl, result, false) == "true") {
-                return "true";
+            ArrayList<MarkerOptions> markerOptionsArrayList = findRestaurants(url, result, true);
+            if (markerOptionsArrayList != null) {
+                restaurantMarkers = markerOptionsArrayList;
+                return markerOptionsArrayList;
             } else {
-                return "false";
+                return null;
             }
         }
 
-        private String estimateTime(URL url, String result, Boolean isCar) {
+        private ArrayList<MarkerOptions> findRestaurants(URL url, String result, Boolean didWork) {
             HttpURLConnection urlConnection = null;
             try {
+                ArrayList<MarkerOptions> markerOptionsArrayList = new ArrayList<>();
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.connect();
 
@@ -448,37 +466,34 @@ public class MapsActivity extends FragmentActivity
                     }
                     if (!jsonObject.getString("status").equals("ZERO_RESULTS")) {
                         // routesArray contains ALL routes
-                        JSONArray routesArray = null;
+                        JSONArray resultsArray = null;
                         try {
-                            routesArray = jsonObject.getJSONArray("routes");
+                            resultsArray = jsonObject.getJSONArray("results");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                         // Grab the first route
-                        JSONObject route = null;
-                        route = routesArray.getJSONObject(0);
+                        for (int i = 0; i < resultsArray.length(); i++) {
+                            JSONObject restaurant = null;
+                            restaurant = resultsArray.getJSONObject(i);
+                            String restaurantName = restaurant.getString("name");
+                            System.out.println("=======================================\n" + restaurantName);
 
-                        JSONArray duration = null;
-                        duration = route.getJSONArray("legs");
+                            JSONObject geometry = null;
+                            try {
+                                geometry = restaurant.getJSONObject("geometry");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
-                        JSONObject text = null;
-                        text = duration.getJSONObject(0);
+                            LatLng restLatLng = new LatLng(geometry.getJSONObject("location").getDouble("lat"), geometry.getJSONObject("location").getDouble("lng"));
 
-                        if (isCar) {
-                            carTime = text.getJSONObject("duration").getString("text");
-                            carNum = text.getJSONObject("duration").getInt("value");
-                            System.out.println(carTime);
-                            System.out.println(carNum);
-                        } else {
-                            publicTime = text.getJSONObject("duration").getString("text");
-                            publicNum = text.getJSONObject("duration").getInt("value");
-                            System.out.println(publicTime);
-                            System.out.println(publicNum);
+                            markerOptionsArrayList.add(new MarkerOptions().position(restLatLng));
                         }
                     }
-                    return "true";
+                    return markerOptionsArrayList;
                 } else {
-                    return "false";
+                    return null;
                 }
 
             } catch (IOException e) {
@@ -505,12 +520,6 @@ public class MapsActivity extends FragmentActivity
 
         }
         protected void onPostExecute(String file_url) {
-            if (publicNum != 0 && carNum != 0) {
-                if (publicNum <= carNum + 350 || publicNum <= carNum * 1.2) {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Public transit is only " + (publicNum - carNum) / 60 + " min slower. Suggest to use public transit.", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-            }
         }
-    } */
+    }
 }
