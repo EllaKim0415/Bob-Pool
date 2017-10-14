@@ -50,7 +50,7 @@
             android:name=".controller.MapsActivity"
             android:label="@string/title_activity_maps">
         </activity>
-        <activity android:name=".model.Location_Checker_Screen"></activity>
+        <activity android:name=".controller.Location_Checker_Screen"></activity>
 
         <activity android:name=".controller.RegisterActivity" />
         <activity android:name=".controller.MakeNewRoomActivity"></activity>
