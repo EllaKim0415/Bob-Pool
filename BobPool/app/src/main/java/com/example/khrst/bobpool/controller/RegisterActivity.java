@@ -1,13 +1,15 @@
-package com.example.khrst.bobpool;
+package com.example.khrst.bobpool.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class RestaurantActivity extends AppCompatActivity {
+import com.example.khrst.bobpool.R;
+
+public class RegisterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_restaurant);
+        setContentView(R.layout.activity_register);
     }
 }

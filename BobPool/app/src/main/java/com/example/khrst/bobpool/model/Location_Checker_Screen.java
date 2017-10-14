@@ -1,4 +1,4 @@
-package com.example.khrst.bobpool;
+package com.example.khrst.bobpool.model;
 
 /**
  * Created by com93 on 10/14/2017.
@@ -13,15 +13,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.firebase.database.DatabaseReference;
+import com.example.khrst.bobpool.R;
+import com.example.khrst.bobpool.controller.MapsActivity;
 import com.wang.avi.AVLoadingIndicatorView;
-
-import java.io.Console;
 
 public class Location_Checker_Screen extends AppCompatActivity {
     TextView text;

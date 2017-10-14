@@ -4,7 +4,7 @@
                                                  xmlns:tools="http://schemas.android.com/tools"
                                                  android:layout_width="match_parent"
                                                  android:layout_height="match_parent"
-                                                 tools:context="com.example.khrst.bobpool.Location_Checker_Screen">
+                                                 tools:context="com.example.khrst.bobpool.model.Location_Checker_Screen">
     <include layout="@layout/content_location_checker" />
 
 

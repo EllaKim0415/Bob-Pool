@@ -1,4 +1,4 @@
-package com.example.khrst.bobpool;
+package com.example.khrst.bobpool.controller;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -29,6 +29,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.khrst.bobpool.model.Location_Checker_Screen;
+import com.example.khrst.bobpool.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +92,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                startActivity(new Intent(LoginActivity.this, Location_Checker_Screen.class));
             }
         });
         registerButton.setOnClickListener(new OnClickListener() {

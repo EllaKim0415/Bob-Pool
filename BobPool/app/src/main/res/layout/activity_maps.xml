@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/touchableMap"
-        android:name="com.example.khrst.bobpool.TouchableMapFragment"
+        android:name="com.example.khrst.bobpool.model.TouchableMapFragment"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"

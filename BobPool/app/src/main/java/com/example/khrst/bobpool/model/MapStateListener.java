@@ -1,4 +1,4 @@
-package com.example.khrst.bobpool;
+package com.example.khrst.bobpool.model;
 
 import android.app.Activity;
 
