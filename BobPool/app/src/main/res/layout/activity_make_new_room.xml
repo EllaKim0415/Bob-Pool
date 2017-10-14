@@ -7,7 +7,7 @@
 
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    tools:context="com.example.khrst.bobpool.MakeNewRoomActivity">
+    tools:context="com.example.khrst.bobpool.Controller.MakeNewRoomActivity">
 
     <TableLayout
         android:layout_width="match_parent"
