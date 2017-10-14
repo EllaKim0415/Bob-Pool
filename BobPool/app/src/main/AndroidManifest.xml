@@ -3,6 +3,7 @@
           xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
     <uses-permission android:name="android.permission.READ_PROFILE"/>
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
@@ -30,8 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".controller.RegisterActivity" />
-        <activity android:name=".controller.RestaurantActivity"></activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -52,6 +51,11 @@
             android:label="@string/title_activity_maps">
         </activity>
         <activity android:name=".model.Location_Checker_Screen"></activity>
+
+        <activity android:name=".controller.RegisterActivity" />
+        <activity android:name=".controller.MakeNewRoomActivity"></activity>
+        <activity android:name=".controller.RestaurantActivity"></activity>
+
     </application>
 
 </manifest>
