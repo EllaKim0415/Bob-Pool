@@ -15,5 +15,19 @@ public class Pool {
         this.time = time;
         this.notes = notes;
     }
-
+    public String getName() {
+        return name;
+    }
+    public String getDate() {
+        return date;
+    }
+    public String getTime() {
+        return time;
+    }
+    public String getNotes() {
+        return notes;
+    }
+    public void setDate(String date) {
+        this.date = date;
+    }
 }
