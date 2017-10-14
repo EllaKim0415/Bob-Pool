@@ -7,14 +7,20 @@ package com.example.khrst.bobpool.model;
  */
 
 public class Pool {
-    private String name, date, maxnum, time, notes;
+    private String restaurant, name, date, time, notes;
+    private int capacity, currentNum;
     //private Calendar newCalendar;
-    public Pool(String name, String date, String maxnum, String time, String notes) {
+    public Pool(String restaurant, String name, String date, String time, String notes, int capacity, int currentNum) {
+        this.restaurant = restaurant;
         this.name = name;
         this.date = date;
         this.time = time;
-        this.maxnum = maxnum;
         this.notes = notes;
+        this.capacity = capacity;
+        this.currentNum = currentNum;
+    }
+    public String getRestaurant() {
+        return restaurant;
     }
     public String getName() {
         return name;
@@ -28,7 +34,11 @@ public class Pool {
     public String getNotes() {
         return notes;
     }
-    public String getMaxnum() {
-        return maxnum;
+    public int getCapacity() {
+        return capacity;
+    }
+    public int getCurrentNum() {
+        return currentNum;
     }
 }
+
