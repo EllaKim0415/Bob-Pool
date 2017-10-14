@@ -25,7 +25,7 @@
         </activity>
 
         <activity android:name=".RegisterActivity" />
-
+        <activity android:name=".MakeNewRoomActivity"></activity>
         <activity android:name=".RestaurantActivity"></activity>
 
     </application>

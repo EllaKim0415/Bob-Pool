@@ -1,9 +1,174 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     tools:context="com.example.khrst.bobpool.MakeNewRoomActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
+
+    <TextView
+        android:id="@+id/newRoomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newname"
+        android:layout_alignBottom="@+id/newname"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:text="Name" />
+
+    <EditText
+        android:id="@+id/newname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/textView7"
+        android:layout_toEndOf="@+id/textView7" />
+
+    <EditText
+        android:id="@+id/newDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newname"
+        android:layout_alignStart="@+id/newname"
+        android:layout_below="@+id/newname"
+        android:contentDescription="MM/dd/yy"
+        android:ems="10"
+        android:hint="MM/dd/yy"
+        android:inputType="date" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/newDate"
+        android:layout_alignBottom="@+id/newDate"
+        android:layout_toLeftOf="@+id/newname"
+        android:layout_toStartOf="@+id/newname"
+        android:text="Date" />
+
+    <EditText
+        android:id="@+id/newTime"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newDate"
+        android:layout_alignStart="@+id/newDate"
+        android:layout_below="@+id/newDate"
+        android:ems="10"
+        android:hint="11:59"
+        android:inputType="time" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newDate"
+        android:layout_marginTop="11dp"
+        android:layout_toLeftOf="@+id/newname"
+        android:layout_toStartOf="@+id/newname"
+        android:text="Time" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Maximum Capacity"
+        android:layout_alignBaseline="@+id/maxnum"
+        android:layout_alignBottom="@+id/maxnum"
+        android:layout_alignLeft="@+id/newRoomName"
+        android:layout_alignStart="@+id/newRoomName" />
+
+    <EditText
+        android:id="@+id/maxnum"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/newname"
+        android:layout_alignRight="@+id/newTime"
+        android:layout_below="@+id/newTime"
+        android:ems="10"
+        android:hint="5"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6"
+        android:layout_below="@+id/maxnum"
+        android:layout_marginTop="56dp"
+        android:text="Notes" />
+
+    <EditText
+        android:id="@+id/notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView7"
+        android:layout_alignBottom="@+id/textView7"
+        android:layout_alignEnd="@+id/maxnum"
+        android:layout_alignRight="@+id/maxnum"
+        android:ems="10"
+        android:hint="Type any thing in mind."
+        android:inputType="textMultiLine" />
+
+    <Button
+        android:id="@+id/addroombutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="96dp"
+        android:text="add" />
+
+    <RadioButton
+        android:id="@+id/AMradioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView5"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignLeft="@+id/maxnum"
+        android:layout_alignStart="@+id/maxnum"
+        android:text="am" />
+
+    <RadioButton
+        android:id="@+id/PMradioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/AMradioButton"
+        android:layout_toEndOf="@+id/AMradioButton"
+        android:layout_toRightOf="@+id/AMradioButton"
+        android:text="pm" />
+
+</RelativeLayout>
