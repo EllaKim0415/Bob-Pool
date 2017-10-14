@@ -26,7 +26,7 @@
         </activity>
 
         <activity android:name=".controller.RegisterActivity" />
-
+        <activity android:name=".controller.MakeNewRoomActivity"></activity>
         <activity android:name=".controller.RestaurantActivity"></activity>
 
     </application>

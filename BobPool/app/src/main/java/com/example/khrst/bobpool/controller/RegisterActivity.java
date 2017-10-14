@@ -72,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
                         || usernameEdit.getText().toString().equals("")
                         || confirmEdit.getText().toString().equals("")
                         || addressEdit.getText().toString().equals("")) {
-                    System.out.println("TTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTT");
 
                     Context context = getApplicationContext();
                     CharSequence text = "Need more registration information.";
@@ -82,7 +81,6 @@ public class RegisterActivity extends AppCompatActivity {
                     toast.show();
 
                 }
-                System.out.println("TTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTT2");
                 registerUser(usernameEdit.getText().toString(), passwordEdit.getText().toString());
             }
         });
@@ -101,7 +99,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser(String e, String p) {
-        System.out.println("TTTTTTTTTTTTTTTTTTEEEEEEEEEEEEEEEEEEEEESSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTT3");
         if (!isValidEmail(e)) {
             Toast.makeText(this, "Please enter valid email", Toast.LENGTH_SHORT).show();
             return;
@@ -148,5 +145,4 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
-
 }
