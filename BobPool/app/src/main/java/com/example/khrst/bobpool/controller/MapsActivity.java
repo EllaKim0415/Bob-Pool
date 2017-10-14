@@ -69,6 +69,7 @@ public class MapsActivity extends FragmentActivity
     private Circle circle;
     private Marker prevMarker;
     private ArrayList<MarkerOptions> restaurantMarkers = new ArrayList<>();
+    private ArrayList<Marker> prevRestaurantMarkers = new ArrayList<>();
 
     // The entry point to Google Play services, used by the Places API and Fused Location Provider.
     private GoogleApiClient mGoogleApiClient;
@@ -85,6 +86,7 @@ public class MapsActivity extends FragmentActivity
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private Location mLastKnownLocation;
+    private Location lastRestaurantLocation;
     private String destination;
 
     // Keys for storing activity state.
@@ -423,9 +425,24 @@ public class MapsActivity extends FragmentActivity
         }
 
         mLastKnownLocation = location;
-        new DisplayRestaurants().execute();
+
+        if (lastRestaurantLocation == null || distanceFrom(lastRestaurantLocation.getLatitude(), lastRestaurantLocation.getLongitude(), mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()) > 500) {
+            new DisplayRestaurants().execute();
+        }
     }
 
+    public static double distanceFrom(double lat1, double lng1, double lat2, double lng2) {
+        double earthRadius = 6371000;
+        double dLat = Math.toRadians(lat2-lat1);
+        double dLng = Math.toRadians(lng2-lng1);
+        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                        Math.sin(dLng/2) * Math.sin(dLng/2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double dist = earthRadius * c;
+
+        return dist;
+    }
 
     public class DisplayRestaurants extends AsyncTask<Void, Integer, ArrayList<MarkerOptions>> {
 
@@ -440,7 +457,7 @@ public class MapsActivity extends FragmentActivity
             }
             ArrayList<MarkerOptions> markerOptionsArrayList = findRestaurants(url, result, true);
             if (markerOptionsArrayList != null) {
-                restaurantMarkers = markerOptionsArrayList;
+//                restaurantMarkers = markerOptionsArrayList;
                 return markerOptionsArrayList;
             } else {
                 return null;
@@ -477,7 +494,7 @@ public class MapsActivity extends FragmentActivity
                             JSONObject restaurant = null;
                             restaurant = resultsArray.getJSONObject(i);
                             String restaurantName = restaurant.getString("name");
-                            System.out.println("=======================================\n" + restaurantName);
+//                            System.out.println("=======================================\n" + restaurantName);
 
                             JSONObject geometry = null;
                             try {
@@ -488,7 +505,7 @@ public class MapsActivity extends FragmentActivity
 
                             LatLng restLatLng = new LatLng(geometry.getJSONObject("location").getDouble("lat"), geometry.getJSONObject("location").getDouble("lng"));
 
-                            markerOptionsArrayList.add(new MarkerOptions().position(restLatLng));
+                            markerOptionsArrayList.add(new MarkerOptions().position(restLatLng).title(restaurantName));
                         }
                     }
                     return markerOptionsArrayList;
@@ -519,7 +536,18 @@ public class MapsActivity extends FragmentActivity
             return result;
 
         }
-        protected void onPostExecute(String file_url) {
+
+        @Override
+        protected void onPostExecute(ArrayList<MarkerOptions> markerOptionsArrayList) {
+            for (Marker marker: prevRestaurantMarkers) {
+                marker.remove();
+            }
+            restaurantMarkers = markerOptionsArrayList;
+            for (MarkerOptions markerOptions: restaurantMarkers) {
+                prevRestaurantMarkers.add(mMap.addMarker(markerOptions));
+            }
+
+            lastRestaurantLocation = mLastKnownLocation;
         }
     }
 }
