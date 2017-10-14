@@ -1,5 +1,6 @@
 package com.example.khrst.bobpool.controller;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -60,6 +61,8 @@ public class MapsActivity extends FragmentActivity
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener, LocationSource{
+
+    private static String selectedRestaurant;
 
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
@@ -138,10 +141,8 @@ public class MapsActivity extends FragmentActivity
                 if (prevMarker != null) {
                     prevMarker.remove();
                 }
-                prevMarker = mMap.addMarker(new MarkerOptions().position(place.getLatLng()));
+                prevMarker = mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(place.getName().toString()));
                 mMap.animateCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
-
-                destination = place.getLatLng().latitude + "," + place.getLatLng().longitude;
             }
 
             @Override
@@ -314,6 +315,14 @@ public class MapsActivity extends FragmentActivity
             }
         });
 
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                selectedRestaurant = marker.getTitle();
+                startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
+                return false;
+            }
+        });
 //        for (DatabaseTester.myObject testing: list) {
 //            circle = mMap.addCircle(new CircleOptions()
 //                .center(new LatLng(testing.getBegintrip_lat(), testing.getBegintrip_long()))
@@ -442,6 +451,10 @@ public class MapsActivity extends FragmentActivity
         double dist = earthRadius * c;
 
         return dist;
+    }
+
+    public static String getSelectedRestaurant() {
+        return selectedRestaurant;
     }
 
     public class DisplayRestaurants extends AsyncTask<Void, Integer, ArrayList<MarkerOptions>> {
