@@ -4,7 +4,6 @@ import android.app.ListActivity;
 import android.os.Bundle;
 
 import com.example.khrst.bobpool.R;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,39 +12,56 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
-public class RestaurantActivity extends ListActivity {
-    ListView lv;
-    static List<String> pools = new ArrayList<>();
+public class RestaurantActivity extends AppCompatActivity {
+    private ListView lv;
+    private static List<String> pools;
+    private Button getList;
+    //public static Pool pool;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_restaurant);
+        lv = (ListView) findViewById(R.id.list);
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
-        super.onCreate(savedInstanceState);
-        lv = (ListView) findViewById(R.id.lv);
-        databaseReference.child("pool").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> poolData = dataSnapshot.getChildren();
-                for (DataSnapshot pool : poolData) {
-                    pools.add(pool.child("title").getValue().toString());
-                }
-            }
+        getList = (Button) findViewById(R.id.listButton);
+        getList.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+           @Override
+           public void onClick(View v) {
 
-            }
-        });
-        if (pools.isEmpty()) {
-            System.out.println("EMPTY");
-        }
-        for (String i: pools) {
-            System.out.println(i);
-        }
+               pools = new ArrayList<>();
+               databaseReference.child("pool").addValueEventListener(new ValueEventListener() {
+                   @Override
+                   public void onDataChange(DataSnapshot dataSnapshot) {
+                       Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                       for (DataSnapshot child : children) {
+                           String childValue = child.child("title").getValue().toString();
+                           pools.add(childValue);
+                           //pools.add(pool.toString());
+                       }
+                   }
+
+                   @Override
+                   public void onCancelled(DatabaseError databaseError) {
+
+                   }
+               });
+               ArrayAdapter<String> adapter = new ArrayAdapter<String>(RestaurantActivity.this,
+                       android.R.layout.simple_list_item_1, pools);
+               lv.setAdapter(adapter);
+           }
+       });
+//
 //        ArrayAdapter<String> adapter = new ArrayAdapter<String>(RestaurantActivity.this,
 //                android.R.layout.simple_list_item_1, pools);
 //        lv.setAdapter(adapter);
