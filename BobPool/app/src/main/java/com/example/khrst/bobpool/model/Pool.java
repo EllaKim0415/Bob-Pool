@@ -7,10 +7,9 @@ package com.example.khrst.bobpool.model;
  */
 
 public class Pool {
-    private String name, phoneNumber, restaurant, title, date, time, notes, capacity, currentNum;
+    private String phoneNumber, restaurant, title, date, time, notes, capacity, currentNum;
     //private Calendar newCalendar;
-    public Pool(String name, String phoneNumber, String restaurant, String title, String date, String time, String notes, String capacity, String currentNum) {
-        this.name = name;
+    public Pool(String phoneNumber, String restaurant, String title, String date, String time, String notes, String capacity, String currentNum) {
         this.phoneNumber = phoneNumber;
         this.restaurant = restaurant;
         this.title = title;
@@ -20,9 +19,7 @@ public class Pool {
         this.capacity = capacity;
         this.currentNum = currentNum;
     }
-    public String getName() {
-        return name;
-    }
+
     public String getPhoneNumber() {
         return phoneNumber;
     }

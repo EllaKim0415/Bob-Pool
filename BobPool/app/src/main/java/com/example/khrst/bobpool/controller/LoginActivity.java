@@ -389,11 +389,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
-    public static String getUserName() {
-        return currentUser.getName().toString();
-    }
+
     public static String getPhoneNumber() {
-        return currentUser.getPhoneNumber().toString();
+        return currentUser.getPhoneNumber();
     }
 }
 

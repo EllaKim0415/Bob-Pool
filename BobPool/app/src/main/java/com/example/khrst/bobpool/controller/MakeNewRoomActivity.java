@@ -96,7 +96,7 @@ public class MakeNewRoomActivity extends AppCompatActivity {
                     if (ampmButton.isChecked()) {
                         amPm = "pm";
                     }
-                    newPool = new Pool(LoginActivity.getUserName(), LoginActivity.getPhoneNumber(),
+                    newPool = new Pool(LoginActivity.getPhoneNumber(),
                             restaurant, newName.getText().toString(),
                             newDate.getText().toString(), (newTime.getText().toString() + amPm),
                             newNotes.getText().toString(), newCapacity.getText().toString(),

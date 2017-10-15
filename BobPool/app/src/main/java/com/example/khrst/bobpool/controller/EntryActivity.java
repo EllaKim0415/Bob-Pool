@@ -22,6 +22,6 @@ public class EntryActivity extends AppCompatActivity {
                 EntryActivity.this.startActivity(mInHome);
                 EntryActivity.this.finish();
             }
-        }, 3000);
+        }, 2000);
     }
 }
