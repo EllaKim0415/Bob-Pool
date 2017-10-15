@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#EBFEDE"
     tools:context="com.example.khrst.bobpool.controller.RegisterActivity"
     android:orientation="vertical">
 
@@ -47,14 +48,13 @@
             android:id="@+id/editTextLastName"
             android:layout_width="178dp"
             android:layout_height="50dp"
-            android:layout_alignBaseline="@+id/editTextFirstName"
-            android:layout_alignBottom="@+id/editTextFirstName"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:ems="10"
             android:hint="Last Name"
             android:inputType="textPersonName"
-            android:labelFor="@+id/_name" />
+            android:labelFor="@+id/_name"
+            android:layout_alignBottom="@+id/editTextFirstName"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <EditText
             android:id="@+id/editText3Phone"
