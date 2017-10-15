@@ -49,13 +49,13 @@
         android:id="@+id/newname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/textView7"
-        android:layout_toEndOf="@+id/textView7" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="20dp" />
 
     <EditText
         android:id="@+id/newDate"
@@ -73,11 +73,11 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Date"
         android:layout_alignBaseline="@+id/newDate"
         android:layout_alignBottom="@+id/newDate"
-        android:layout_toLeftOf="@+id/newname"
-        android:layout_toStartOf="@+id/newname"
-        android:text="Date" />
+        android:layout_alignLeft="@+id/newRoomName"
+        android:layout_alignStart="@+id/newRoomName" />
 
     <EditText
         android:id="@+id/newTime"
@@ -94,11 +94,11 @@
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/newDate"
-        android:layout_marginTop="11dp"
-        android:layout_toLeftOf="@+id/newname"
-        android:layout_toStartOf="@+id/newname"
-        android:text="Time" />
+        android:text="Time"
+        android:layout_alignBaseline="@+id/newTime"
+        android:layout_alignBottom="@+id/newTime"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView6"
