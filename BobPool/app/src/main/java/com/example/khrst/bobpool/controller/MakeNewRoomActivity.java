@@ -32,12 +32,12 @@ public class MakeNewRoomActivity extends AppCompatActivity {
     private ToggleButton ampmButton;
     private EditText newName, newDate, newTime, newCapacity, newNotes, currentNum;
     private Calendar newCalendar;
-    private String amPm;
+    private String amPm = "am";
     private Pool newPool;
-
+    private String restaurant = MapsActivity.getSelectedRestaurant();
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getInstance().getReference("pool");
+    DatabaseReference databaseReference = database.getInstance().getReference(restaurant);
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -93,17 +93,12 @@ public class MakeNewRoomActivity extends AppCompatActivity {
                     toast.show();
 
                 } else {
-                    ampmButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                            if (isChecked) {
-                                amPm = " pm";
-                            } else {
-                                amPm = " am";
-                            }
-                        }
-                    });
-                    newPool = new Pool(MapsActivity.getSelectedRestaurant(), newName.getText().toString(),
-                            newDate.getText().toString(), newTime.getText().toString() + amPm,
+                    if (ampmButton.isChecked()) {
+                        amPm = "pm";
+                    }
+                    newPool = new Pool(LoginActivity.getUserName(), LoginActivity.getPhoneNumber(),
+                            restaurant, newName.getText().toString(),
+                            newDate.getText().toString(), (newTime.getText().toString() + amPm),
                             newNotes.getText().toString(), newCapacity.getText().toString(),
                             currentNum.getText().toString());
                     newPooling(newPool);
