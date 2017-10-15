@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -92,8 +93,17 @@ public class MakeNewRoomActivity extends AppCompatActivity {
                     toast.show();
 
                 } else {
+                    ampmButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                            if (isChecked) {
+                                amPm = " pm";
+                            } else {
+                                amPm = " am";
+                            }
+                        }
+                    });
                     newPool = new Pool(MapsActivity.getSelectedRestaurant(), newName.getText().toString(),
-                            newDate.getText().toString(), newTime.getText().toString(),
+                            newDate.getText().toString(), newTime.getText().toString() + amPm,
                             newNotes.getText().toString(), newCapacity.getText().toString(),
                             currentNum.getText().toString());
                     newPooling(newPool);
