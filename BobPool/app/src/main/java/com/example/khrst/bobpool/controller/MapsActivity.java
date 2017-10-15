@@ -1,16 +1,21 @@
 package com.example.khrst.bobpool.controller;
 
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
 import com.amazonaws.auth.AWSCredentials;
@@ -331,9 +336,9 @@ public class MapsActivity extends FragmentActivity
                 Map<String, MessageAttributeValue> smsAttributes =
                         new HashMap<String, MessageAttributeValue>();
                 //<set SMS attributes>
-                sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
+                //sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
 
-
+                sendNotification();
 
                 selectedRestaurant = marker.getTitle();
                 startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
@@ -360,7 +365,26 @@ public class MapsActivity extends FragmentActivity
         });
 
         thread.start();
-        System.out.println(result); // Prints the message ID.
+    }
+
+    public void sendNotification() {
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+
+    //Create the intent that’ll fire when the user taps the notification//
+
+//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.androidauthority.com/"));
+//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+//
+//        mBuilder.setContentIntent(pendingIntent);
+
+        mBuilder.setSmallIcon(R.drawable.bablogo);
+        mBuilder.setContentTitle("BobPool Matched!");
+        mBuilder.setContentText("You have been matched with someone to share food.");
+        mBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(1, mBuilder.build());
     }
 
     /**
