@@ -1,6 +1,7 @@
 package com.example.khrst.bobpool.controller;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -82,7 +83,8 @@ public class MapsActivity extends FragmentActivity
     private SupportMapFragment mapFragment;
 
     private Circle circle;
-    private Marker prevMarker;
+    private Marker prevMarker; // previous marker for previous location searched by autocomplete
+    private Marker prevClickedMarker; // previous marker for previously clicked marker
     private ArrayList<MarkerOptions> restaurantMarkers = new ArrayList<>();
     private ArrayList<Marker> prevRestaurantMarkers = new ArrayList<>();
 
@@ -341,7 +343,18 @@ public class MapsActivity extends FragmentActivity
                 sendNotification();
 
                 selectedRestaurant = marker.getTitle();
-                startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
+
+                if ( (marker.getTag() == null || (Integer) marker.getTag() == 0)) {
+                    marker.setTag(1);
+                    if (prevClickedMarker != null) {
+                        prevClickedMarker.setTag(0);
+                    }
+                } else {
+                    marker.setTag(0);
+                    startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
+                }
+
+                prevClickedMarker = marker;
                 return false;
             }
         });
@@ -349,7 +362,6 @@ public class MapsActivity extends FragmentActivity
 
     public static void sendSMSMessage(final AmazonSNSClient snsClient, final String message,
                                       final String phoneNumber, final Map<String, MessageAttributeValue> smsAttributes) {
-        PublishResult result = null;
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -373,10 +385,10 @@ public class MapsActivity extends FragmentActivity
 
     //Create the intent that’ll fire when the user taps the notification//
 
-//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.androidauthority.com/"));
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-//
-//        mBuilder.setContentIntent(pendingIntent);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, MapsActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+
+        mBuilder.setContentIntent(pendingIntent);
 
         mBuilder.setSmallIcon(R.drawable.bablogo);
         mBuilder.setContentTitle("BobPool Matched!");
