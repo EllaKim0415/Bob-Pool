@@ -31,7 +31,7 @@ public class MakeNewRoomActivity extends AppCompatActivity {
 
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = database.getInstance().getReference("user");
+    DatabaseReference databaseReference = database.getInstance().getReference("pool");
     FirebaseAuth firebaseAuth;
 
     @Override

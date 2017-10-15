@@ -9,7 +9,6 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/login"
     tools:context="com.example.khrst.bobpool.controller.LoginActivity">
 
     <!-- Login progress -->
@@ -67,12 +66,11 @@
 
             <Button
                 android:id="@+id/loginButton"
-                style="?android:textAppearanceSmall"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Log In"
-                android:textStyle="bold" />
+                android:text="Log In" />
 
             <Button
                 android:id="@+id/registerButton"
