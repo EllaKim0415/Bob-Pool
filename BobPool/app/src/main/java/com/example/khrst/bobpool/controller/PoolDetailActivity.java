@@ -1,5 +1,6 @@
 package com.example.khrst.bobpool.controller;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -105,8 +106,10 @@ public class PoolDetailActivity extends AppCompatActivity {
                             new HashMap<String, MessageAttributeValue>();
                     //<set SMS attributes>
                     sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
+                    startActivity(new Intent(getApplicationContext(), RestaurantActivity.class));
                 } else {
                     Toast.makeText(PoolDetailActivity.this,"This pool capacity is full :(",Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(getApplicationContext(), RestaurantActivity.class));
                 }
             }
         });

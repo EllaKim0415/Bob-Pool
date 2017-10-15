@@ -1,6 +1,8 @@
 package com.example.khrst.bobpool.controller;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import android.app.DatePickerDialog;
@@ -26,6 +28,7 @@ import com.example.khrst.bobpool.model.Pool;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.kunzisoft.switchdatetime.SwitchDateTimeDialogFragment;
 
 public class MakeNewRoomActivity extends AppCompatActivity {
     private Button addButton;
@@ -35,6 +38,8 @@ public class MakeNewRoomActivity extends AppCompatActivity {
     private String amPm = "am";
     private Pool newPool;
     private String restaurant = MapsActivity.getSelectedRestaurant();
+
+    private SwitchDateTimeDialogFragment dateTimeFragment;
 
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = database.getInstance().getReference(restaurant);
@@ -51,27 +56,26 @@ public class MakeNewRoomActivity extends AppCompatActivity {
         currentNum = (EditText) findViewById(R.id.currentNum);
         newNotes = (EditText) findViewById(R.id.notes);
         newCalendar = Calendar.getInstance();
+
         ampmButton = (ToggleButton) findViewById(R.id.ampmbutton);
         addButton = (Button) findViewById(R.id.addroombutton);
+        makeDateTimeFragment();
 
-        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                newCalendar.set(Calendar.YEAR, year);
-                newCalendar.set(Calendar.MONTH, month);
-                newCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                updateLabel(newDate);
-
-            }
-        };
         newDate.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                new DatePickerDialog(MakeNewRoomActivity.this, date, newCalendar
-                        .get(Calendar.YEAR), newCalendar.get(Calendar.MONTH),
-                        newCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                // Show
+                dateTimeFragment.show(getSupportFragmentManager(), "dialog_time");
+            }
+        });
+
+        newTime.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+// Show
+                dateTimeFragment.show(getSupportFragmentManager(), "dialog_time");
             }
         });
 
@@ -107,15 +111,63 @@ public class MakeNewRoomActivity extends AppCompatActivity {
             }
         });
     }
+
     private void newPooling(Pool pool) {
         String id = databaseReference.push().getKey();
-        databaseReference.child(id).setValue(pool);
-        Toast.makeText(MakeNewRoomActivity.this,"Successfully added.",Toast.LENGTH_LONG).show();
+        databaseReference.child(id).setValue("pool");
+        Toast.makeText(MakeNewRoomActivity.this, "Successfully added.", Toast.LENGTH_LONG).show();
     }
+
     private void updateLabel(EditText t) {
 
         String myFormat = "MM/dd/yy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
         t.setText(sdf.format(newCalendar.getTime()));
     }
+
+    private void makeDateTimeFragment() {
+        dateTimeFragment = SwitchDateTimeDialogFragment.newInstance(
+                "Set Time",
+                "OK",
+                "Cancel"
+        );
+
+// Assign values
+        dateTimeFragment.startAtCalendarView();
+        dateTimeFragment.set24HoursMode(false);
+        dateTimeFragment.setMinimumDateTime(new GregorianCalendar(2015, Calendar.JANUARY, 1).getTime());
+        dateTimeFragment.setMaximumDateTime(new GregorianCalendar(2025, Calendar.DECEMBER, 31).getTime());
+        dateTimeFragment.setDefaultDateTime(new GregorianCalendar().getTime());
+
+// Define new day and month format
+        try {
+            dateTimeFragment.setSimpleDateMonthAndDayFormat(new SimpleDateFormat("dd MMMM", Locale.getDefault()));
+        } catch (SwitchDateTimeDialogFragment.SimpleDateMonthAndDayFormatException e) {
+        }
+
+// Set listener
+        dateTimeFragment.setOnButtonClickListener(new SwitchDateTimeDialogFragment.OnButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Date date) {
+                newCalendar.set(Calendar.YEAR, dateTimeFragment.getYear());
+                newCalendar.set(Calendar.MONTH, dateTimeFragment.getMonth());
+                newCalendar.set(Calendar.DAY_OF_MONTH, dateTimeFragment.getDay());
+                updateLabel(newDate);
+
+                int hour = date.getHours() % 12;
+                newTime.setText(hour + ":" + date.getMinutes());
+                if (date.getHours() > 12) {
+                    ampmButton.setChecked(true);
+                } else {
+                    ampmButton.setChecked(false);
+                }
+            }
+
+            @Override
+            public void onNegativeButtonClick(Date date) {
+                // Date is get on negative button click
+            }
+        });
+    }
 }
+

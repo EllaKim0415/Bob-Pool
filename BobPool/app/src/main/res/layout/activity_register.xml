@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#EBFEDE"
     tools:context="com.example.khrst.bobpool.controller.RegisterActivity"
     android:orientation="vertical">
 
@@ -47,14 +48,13 @@
             android:id="@+id/editTextLastName"
             android:layout_width="178dp"
             android:layout_height="50dp"
-            android:layout_alignBaseline="@+id/editTextFirstName"
-            android:layout_alignBottom="@+id/editTextFirstName"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
             android:ems="10"
             android:hint="Last Name"
             android:inputType="textPersonName"
-            android:labelFor="@+id/_name" />
+            android:labelFor="@+id/_name"
+            android:layout_alignBottom="@+id/editTextFirstName"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
 
         <EditText
             android:id="@+id/editText3Phone"
@@ -128,8 +128,10 @@
 
         <Button
             android:id="@+id/registerButton"
+            android:textColor="@color/textColor"
+            android:background="@color/buttonColor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:text="Register"
             android:layout_below="@+id/editText11confirm"
             android:layout_toLeftOf="@+id/editTextLastName"
@@ -151,8 +153,10 @@
 
         <Button
             android:id="@+id/cancelbutton"
+            android:textColor="@color/textColor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@color/buttonColor"
             android:layout_alignTop="@+id/registerButton"
             android:layout_marginLeft="30dp"
             android:layout_marginStart="30dp"

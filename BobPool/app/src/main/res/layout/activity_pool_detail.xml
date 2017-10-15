@@ -9,6 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+
     tools:context="com.example.khrst.bobpool.controller.PoolDetailActivity"
     tools:layout_editor_absoluteY="81dp"
     tools:layout_editor_absoluteX="0dp">
@@ -154,9 +155,6 @@
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:scaleType="fitXY"
             app:srcCompat="@drawable/foodex" />
 
@@ -219,12 +217,15 @@
 
         <Button
             android:id="@+id/joinButton"
+            android:textColor="@color/textColor"
+            android:background="@color/buttonColor"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:text="JOIN"
             android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/textViewCapacity"
             android:layout_toRightOf="@+id/textViewCapacity"
-            android:text="JOIN" />
+            android:layout_toEndOf="@+id/textViewCapacity"
+            android:layout_marginBottom="24dp" />
 
     </RelativeLayout>
 </LinearLayout>
