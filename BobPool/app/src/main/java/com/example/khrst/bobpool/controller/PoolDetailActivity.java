@@ -38,6 +38,8 @@ public class PoolDetailActivity extends AppCompatActivity {
                 for (DataSnapshot child : children) {
                     if (child.getKey().equals(key)) {
                         selected = child.getValue(Pool.class);
+                    } else {
+                        selected = new Pool("no", "no", "no", "no", "no", "no", "no", "no");
                     }
                 }
             }
