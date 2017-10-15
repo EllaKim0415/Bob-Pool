@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.khrst.bobpool.controller.PoolDetailActivity"
+    tools:layout_editor_absoluteY="81dp"
+    tools:layout_editor_absoluteX="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textViewRestaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:text="Restaurant"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/textViewDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewRestaurant"
+            android:layout_marginLeft="14dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="10dp"
+            android:text="Date:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewDate"
+            android:layout_alignStart="@+id/textViewDate"
+            android:layout_below="@+id/textViewDate"
+            android:layout_marginTop="10dp"
+            android:text="Time:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewFood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewTime"
+            android:layout_alignStart="@+id/textViewTime"
+            android:layout_below="@+id/textViewTime"
+            android:layout_marginTop="11dp"
+            android:text="Food(Menu):"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewCapacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewFood"
+            android:layout_alignStart="@+id/textViewFood"
+            android:layout_below="@+id/textViewFood"
+            android:layout_marginTop="11dp"
+            android:text="Capacity: "
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewCapacity"
+            android:layout_alignStart="@+id/textViewCapacity"
+            android:layout_below="@+id/textViewCapacity"
+            android:layout_marginTop="11dp"
+            android:text="Name:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewName"
+            android:layout_alignStart="@+id/textViewName"
+            android:layout_below="@+id/textViewName"
+            android:layout_marginTop="10dp"
+            android:text="Notes:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewDateResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textViewTime"
+            android:layout_toEndOf="@+id/textViewRestaurant"
+            android:layout_toRightOf="@+id/textViewRestaurant"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewTimeResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textViewFood"
+            android:layout_alignLeft="@+id/textViewDateResult"
+            android:layout_alignStart="@+id/textViewDateResult"
+            android:layout_alignTop="@+id/textViewTime"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewMenuResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textViewTimeResult"
+            android:layout_alignStart="@+id/textViewTimeResult"
+            android:layout_alignTop="@+id/textViewFood"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewCapacityResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textViewCapacity"
+            android:layout_alignLeft="@+id/textViewMenuResult"
+            android:layout_alignStart="@+id/textViewMenuResult"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewNameResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textViewNote"
+            android:layout_alignLeft="@+id/textViewCapacityResult"
+            android:layout_alignStart="@+id/textViewCapacityResult"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textViewNoteResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textViewNote"
+            android:layout_alignLeft="@+id/textViewNameResult"
+            android:layout_alignStart="@+id/textViewNameResult"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</LinearLayout>
