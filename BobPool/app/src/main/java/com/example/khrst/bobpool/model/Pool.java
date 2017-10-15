@@ -19,7 +19,9 @@ public class Pool {
         this.capacity = capacity;
         this.currentNum = currentNum;
     }
+    public Pool() {
 
+    }
     public String getPhoneNumber() {
         return phoneNumber;
     }

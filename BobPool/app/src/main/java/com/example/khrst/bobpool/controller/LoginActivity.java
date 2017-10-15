@@ -389,7 +389,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
         }
     }
-
     public static String getPhoneNumber() {
         return currentUser.getPhoneNumber();
     }

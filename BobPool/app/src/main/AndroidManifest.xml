@@ -50,6 +50,7 @@
         <activity android:name=".controller.RegisterActivity" />
         <activity android:name=".controller.MakeNewRoomActivity" />
         <activity android:name=".controller.RestaurantActivity" />
+        <activity android:name=".controller.PoolDetailActivity"/>
         <activity android:name=".controller.EntryActivity">
             <intent-filter>
             <action android:name="android.intent.action.MAIN" />
