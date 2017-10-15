@@ -40,6 +40,8 @@ dependencies {
     compile 'com.amazonaws:aws-android-sdk-ddb:2.6.5'
     compile 'com.amazonaws:aws-android-sdk-sns:2.6.5'
 
+    compile 'com.github.Kunzisoft:Android-SwitchDateTimePicker:1.8'
+
     testCompile 'junit:junit:4.12'
 }
 
