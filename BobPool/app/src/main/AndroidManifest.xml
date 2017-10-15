@@ -56,6 +56,14 @@
         <activity android:name=".controller.MakeNewRoomActivity"></activity>
         <activity android:name=".controller.RestaurantActivity"></activity>
 
+        <activity
+            android:name="com.braunster.chatsdk.activities.ChatSDKLoginActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/ChatSDKTheme"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            >
+        </activity>
     </application>
 
 </manifest>

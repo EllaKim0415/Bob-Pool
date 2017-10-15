@@ -1,6 +1,7 @@
 package com.example.khrst.bobpool.controller;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -48,6 +49,12 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import com.braunster.androidchatsdk.firebaseplugin.firebase.BChatcatNetworkAdapter;
+import com.braunster.chatsdk.Utils.helper.ChatSDKUiHelper;
+import com.braunster.chatsdk.network.BDefines;
+import com.braunster.chatsdk.network.BNetworkManager;
+import com.braunster.chatsdk.activities.ChatSDKLoginActivity;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -162,6 +169,18 @@ public class MapsActivity extends FragmentActivity
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
+
+        // This is used for the app custom toast and activity transition
+        ChatSDKUiHelper.initDefault();
+
+        // Init the network manager
+        BNetworkManager.init(getApplicationContext());
+
+        // Create a new adapter
+        BChatcatNetworkAdapter adapter = new BChatcatNetworkAdapter(getApplicationContext());
+
+        // Set the adapter
+        BNetworkManager.sharedManager().setNetworkAdapter(adapter);
     }
 
     /**
@@ -342,6 +361,7 @@ public class MapsActivity extends FragmentActivity
 
                 selectedRestaurant = marker.getTitle();
                 startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
+
                 return false;
             }
         });
@@ -372,15 +392,14 @@ public class MapsActivity extends FragmentActivity
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
 
     //Create the intent that’ll fire when the user taps the notification//
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, ChatSDKLoginActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
 
-//        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.androidauthority.com/"));
-//        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-//
-//        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setContentIntent(pendingIntent);
 
         mBuilder.setSmallIcon(R.drawable.bablogo);
         mBuilder.setContentTitle("BobPool Matched!");
-        mBuilder.setContentText("You have been matched with someone to share food.");
+        mBuilder.setContentText("You have been matched with someone to share food.\nTouch this notification to chat with your match!");
         mBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
