@@ -131,7 +131,6 @@ public class RestaurantActivity extends AppCompatActivity {
                 startActivity(new Intent(RestaurantActivity.this, MakeNewRoomActivity.class));
             }
         });
-        getList.performClick();
     }
     public static String getSelectedKey() {
         return selectedKey;

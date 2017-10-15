@@ -32,6 +32,7 @@ public class PoolDetailActivity extends AppCompatActivity {
         //selected = RestaurantActivity.getSelectedPool();
         selectedKey = RestaurantActivity.getSelectedKey();
 
+
 //        databaseReference.addValueEventListener(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(DataSnapshot dataSnapshot) {
@@ -48,6 +49,26 @@ public class PoolDetailActivity extends AppCompatActivity {
 //
 //            }
 //        });
+//        key = RestaurantActivity.getSelectedKey();
+//        databaseReference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+//                for (DataSnapshot child : children) {
+//                    if (child.getKey().equals(key)) {
+//                        selected = child.getValue(Pool.class);
+//                    } else {
+//                        selected = new Pool("no", "no", "no", "no", "no", "no", "no", "no");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        });
+
         restaurant = (TextView) findViewById(R.id.restaurantText);
         restaurant.setText(selected.getRestaurant());
         name = (TextView) findViewById(R.id.nameText);
