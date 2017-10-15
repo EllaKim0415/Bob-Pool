@@ -13,6 +13,12 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.sns.AmazonSNSClient;
+import com.amazonaws.services.sns.model.MessageAttributeValue;
+import com.amazonaws.services.sns.model.PublishRequest;
+import com.amazonaws.services.sns.model.PublishResult;
 import com.example.khrst.bobpool.model.MapStateListener;
 import com.example.khrst.bobpool.R;
 import com.example.khrst.bobpool.model.TouchableMapFragment;
@@ -51,6 +57,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An activity that displays a map showing the place at the device's current location.
@@ -89,7 +97,6 @@ public class MapsActivity extends FragmentActivity
     // location retrieved by the Fused Location Provider.
     private Location mLastKnownLocation;
     private Location lastRestaurantLocation;
-    private String destination;
 
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
@@ -317,11 +324,43 @@ public class MapsActivity extends FragmentActivity
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                AWSCredentials awsCredentials =new BasicAWSCredentials("AKIAJKZ6SLJ7A4FTGUWQ", "PnsZuBPZPFn20Mr/ZybYN06pgXwK9gcp+UklkpN7");
+                AmazonSNSClient snsClient = new AmazonSNSClient(awsCredentials);
+                String message = "My SMS message";
+                String phoneNumber = "+17578025946";
+                Map<String, MessageAttributeValue> smsAttributes =
+                        new HashMap<String, MessageAttributeValue>();
+                //<set SMS attributes>
+                sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
+
+
+
                 selectedRestaurant = marker.getTitle();
                 startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
                 return false;
             }
         });
+    }
+
+    public static void sendSMSMessage(final AmazonSNSClient snsClient, final String message,
+                                      final String phoneNumber, final Map<String, MessageAttributeValue> smsAttributes) {
+        PublishResult result = null;
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try  {
+                    PublishResult result = snsClient.publish(new PublishRequest()
+                            .withMessage(message)
+                            .withPhoneNumber(phoneNumber)
+                            .withMessageAttributes(smsAttributes));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+        System.out.println(result); // Prints the message ID.
     }
 
     /**
