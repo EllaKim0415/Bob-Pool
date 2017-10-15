@@ -37,7 +37,7 @@ public class RestaurantActivity extends AppCompatActivity {
         getList.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
-               databaseReference.child("pool").addValueEventListener(new ValueEventListener() {
+               databaseReference.child(MapsActivity.getSelectedRestaurant()).addValueEventListener(new ValueEventListener() {
                    @Override
                    public void onDataChange(DataSnapshot dataSnapshot) {
                        Iterable<DataSnapshot> children = dataSnapshot.getChildren();
@@ -66,5 +66,6 @@ public class RestaurantActivity extends AppCompatActivity {
                 startActivity(new Intent(RestaurantActivity.this, MakeNewRoomActivity.class));
             }
         });
+        getList.performClick();
     }
 }
