@@ -1,18 +1,30 @@
 package com.example.khrst.bobpool.controller;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.AsyncTaskLoader;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.sns.AmazonSNSClient;
+import com.amazonaws.services.sns.model.MessageAttributeValue;
+import com.amazonaws.services.sns.model.PublishRequest;
+import com.amazonaws.services.sns.model.PublishResult;
 import com.example.khrst.bobpool.model.MapStateListener;
 import com.example.khrst.bobpool.R;
 import com.example.khrst.bobpool.model.TouchableMapFragment;
@@ -57,6 +69,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * An activity that displays a map showing the place at the device's current location.
@@ -74,7 +88,8 @@ public class MapsActivity extends FragmentActivity
     private SupportMapFragment mapFragment;
 
     private Circle circle;
-    private Marker prevMarker;
+    private Marker prevMarker; // previous marker for previous location searched by autocomplete
+    private Marker prevClickedMarker; // previous marker for previously clicked marker
     private ArrayList<MarkerOptions> restaurantMarkers = new ArrayList<>();
     private ArrayList<Marker> prevRestaurantMarkers = new ArrayList<>();
 
@@ -94,7 +109,6 @@ public class MapsActivity extends FragmentActivity
     // location retrieved by the Fused Location Provider.
     private Location mLastKnownLocation;
     private Location lastRestaurantLocation;
-    private String destination;
 
     // Keys for storing activity state.
     private static final String KEY_CAMERA_POSITION = "camera_position";
@@ -322,11 +336,72 @@ public class MapsActivity extends FragmentActivity
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                AWSCredentials awsCredentials =new BasicAWSCredentials("AKIAJKZ6SLJ7A4FTGUWQ", "PnsZuBPZPFn20Mr/ZybYN06pgXwK9gcp+UklkpN7");
+                AmazonSNSClient snsClient = new AmazonSNSClient(awsCredentials);
+                String message = "My SMS message";
+                String phoneNumber = "+17578025946";
+                Map<String, MessageAttributeValue> smsAttributes =
+                        new HashMap<String, MessageAttributeValue>();
+                //<set SMS attributes>
+                //sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
+
+                sendNotification();
+
                 selectedRestaurant = marker.getTitle();
-                startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
+
+                if ( (marker.getTag() == null || (Integer) marker.getTag() == 0)) {
+                    marker.setTag(1);
+                    if (prevClickedMarker != null) {
+                        prevClickedMarker.setTag(0);
+                    }
+                } else {
+                    marker.setTag(0);
+                    startActivity(new Intent(MapsActivity.this, RestaurantActivity.class));
+                }
+
+                prevClickedMarker = marker;
                 return false;
             }
         });
+    }
+
+    public static void sendSMSMessage(final AmazonSNSClient snsClient, final String message,
+                                      final String phoneNumber, final Map<String, MessageAttributeValue> smsAttributes) {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try  {
+                    PublishResult result = snsClient.publish(new PublishRequest()
+                            .withMessage(message)
+                            .withPhoneNumber(phoneNumber)
+                            .withMessageAttributes(smsAttributes));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        thread.start();
+    }
+
+    public void sendNotification() {
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+
+    //Create the intent that’ll fire when the user taps the notification//
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, MapsActivity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+
+        mBuilder.setContentIntent(pendingIntent);
+
+        mBuilder.setSmallIcon(R.drawable.bablogo);
+        mBuilder.setContentTitle("BobPool Matched!");
+        mBuilder.setContentText("You have been matched with someone to share food.");
+        mBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(1, mBuilder.build());
     }
 
     /**
