@@ -26,10 +26,10 @@ public class RestaurantActivity extends AppCompatActivity {
     private ListView lv;
     private static List<String> pools = new ArrayList<>();
     private static List<String> keys = new ArrayList<>();
-//    private static List<Pool> poolList = new ArrayList<>();
+    private static List<Pool> poolList = new ArrayList<>();
     static int placed = 0;
     private static String selectedKey;
-//    private static Pool selectedPool;
+    private static Pool selectedPool;
     private Button getList;
     FirebaseDatabase database;
     DatabaseReference databaseReference;
@@ -50,7 +50,7 @@ public class RestaurantActivity extends AppCompatActivity {
                        Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                        for (DataSnapshot child : children) {
                            keys.add(child.getKey());
-                           //poolList.add(child.getValue(Pool.class));
+                           poolList.add(child.getValue(Pool.class));
                            pools.add(child.child("title").getValue().toString() + "(" +
                                    child.child("currentNum").getValue().toString() + "/" + child.
                                    child("capacity").getValue().toString() + ")");
@@ -89,7 +89,7 @@ public class RestaurantActivity extends AppCompatActivity {
                         Iterable<DataSnapshot> children = dataSnapshot.getChildren();
                         selectedKey = keys.get(placed);
 
-//                        selectedPool = poolList.get(placed);
+                        selectedPool = poolList.get(placed);
 
 
 //
@@ -135,7 +135,7 @@ public class RestaurantActivity extends AppCompatActivity {
     public static String getSelectedKey() {
         return selectedKey;
     }
-//    public static Pool getSelectedPool() {
-//        return selectedPool;
-//    }
+    public static Pool getSelectedPool() {
+        return selectedPool;
+    }
 }

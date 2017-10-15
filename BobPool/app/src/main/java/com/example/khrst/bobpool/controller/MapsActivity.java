@@ -336,15 +336,6 @@ public class MapsActivity extends FragmentActivity
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                AWSCredentials awsCredentials =new BasicAWSCredentials("AKIAJKZ6SLJ7A4FTGUWQ", "PnsZuBPZPFn20Mr/ZybYN06pgXwK9gcp+UklkpN7");
-                AmazonSNSClient snsClient = new AmazonSNSClient(awsCredentials);
-                String message = "My SMS message";
-                String phoneNumber = "+17578025946";
-                Map<String, MessageAttributeValue> smsAttributes =
-                        new HashMap<String, MessageAttributeValue>();
-                //<set SMS attributes>
-                //sendSMSMessage(snsClient, message, phoneNumber, smsAttributes);
-
                 sendNotification();
 
                 selectedRestaurant = marker.getTitle();
@@ -363,25 +354,6 @@ public class MapsActivity extends FragmentActivity
                 return false;
             }
         });
-    }
-
-    public static void sendSMSMessage(final AmazonSNSClient snsClient, final String message,
-                                      final String phoneNumber, final Map<String, MessageAttributeValue> smsAttributes) {
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try  {
-                    PublishResult result = snsClient.publish(new PublishRequest()
-                            .withMessage(message)
-                            .withPhoneNumber(phoneNumber)
-                            .withMessageAttributes(smsAttributes));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
     }
 
     public void sendNotification() {
